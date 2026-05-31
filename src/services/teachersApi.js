@@ -1,9 +1,18 @@
-import { ref, get } from "firebase/database";
+import { ref, get, query, limitToFirst } from "firebase/database";
+
 import { database } from "../firebase/config";
 
-export const getTeachers = async () => {
+export const getTeachers = async (limit = null) => {
   try {
-    const snapshot = await get(ref(database, "teachers"));
+    let teachersRef;
+
+    if (limit) {
+      teachersRef = query(ref(database, "teachers"), limitToFirst(limit));
+    } else {
+      teachersRef = ref(database, "teachers");
+    }
+
+    const snapshot = await get(teachersRef);
 
     if (snapshot.exists()) {
       return Object.values(snapshot.val());
@@ -12,6 +21,7 @@ export const getTeachers = async () => {
     return [];
   } catch (error) {
     console.error(error);
+
     throw error;
   }
 };

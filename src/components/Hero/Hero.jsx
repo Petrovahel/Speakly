@@ -1,22 +1,26 @@
 import css from "./Hero.module.css";
+import { NavLink } from "react-router-dom";
 
 export default function Hero() {
   return (
     <div className={css.hero}>
-      <h1 className={css.title}>
-        Unlock your potential with the best <span> language </span> tutors
-      </h1>
-      <p className={css.subtitle}>
-        Embark on an Exciting Language Journey with Expert Language Tutors:
-        Elevate your language proficiency to new heights by connecting with
-        highly qualified and experienced tutors.
-      </p>
-      <button className={css.cta}>Get started</button>
-      <img
-        src="/images/hero-image.jpg"
-        alt="Hero Image"
-        className={css.image}
-      />
+      <div className={css.content}>
+        <div className={css.mainContent}>
+          <h1 className={css.mainTitle}>
+            Unlock your potential with the best{" "}
+            <span className={css.cursor}> language </span> tutors
+          </h1>
+          <p className={css.subtitle}>
+            Embark on an Exciting Language Journey with Expert Language Tutors:
+            Elevate your language proficiency to new heights by connecting with
+            highly qualified and experienced tutors.
+          </p>
+          <NavLink to="/teachers">
+            <button className={css.startBtn}>Get started</button>
+          </NavLink>
+        </div>
+        <img src="/hero2x.jpg" alt="Hero Image" className={css.mainImg} />
+      </div>
       <ul className={css.features}>
         <li className={css.feature}>
           <p className={css.featureTitle}>32,000 +</p>

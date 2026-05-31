@@ -1,0 +1,19 @@
+.loadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0px;
+  border-radius: 12px;
+  padding: 16px 48px;
+  max-width: 100%;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.55556;
+  color: #121417;
+  background: #f4c550;
+  margin: 64px 0;
+}
+.loadBtn:hover {
+  background: #ffdc86;
+}
