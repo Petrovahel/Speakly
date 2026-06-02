@@ -9,7 +9,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/Speakly/">
       <AuthProvider>
         <App />
         <Toaster position="top-right" />

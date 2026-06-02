@@ -19,7 +19,12 @@ export default function Hero() {
             <button className={css.startBtn}>Get started</button>
           </NavLink>
         </div>
-        <img src="/hero2x.jpg" alt="Hero Image" className={css.mainImg} />
+        <img
+          src="/Speakly/hero.jpg"
+          srcSet="/Speakly/hero.jpg 1x, /Speakly/hero2x.jpg 2x"
+          alt="Hero Image"
+          className={css.mainImg}
+        />
       </div>
       <ul className={css.features}>
         <li className={css.feature}>

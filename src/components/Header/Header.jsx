@@ -28,7 +28,7 @@ export default function Header() {
     <header className={css.header}>
       <NavLink className={css.logo} to="/">
         <img
-          src="/ukraine.svg"
+          src="/Speakly/ukraine.svg"
           alt="LearnLingo Logo"
           className={css.logoImage}
         />
