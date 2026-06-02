@@ -18,7 +18,7 @@ export default function TeachersPage() {
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
-        const data = await getTeachers(visibleCount);
+        const data = await getTeachers();
 
         setTeachers(data);
       } catch (error) {
@@ -27,7 +27,7 @@ export default function TeachersPage() {
     };
 
     fetchTeachers();
-  }, [visibleCount]);
+  }, []);
 
   const filteredTeachers = teachers.filter((teacher) => {
     const matchesLanguage =
@@ -68,14 +68,14 @@ export default function TeachersPage() {
       />
 
       <ul className={css.teachersList}>
-        {filteredTeachers.map((teacher) => (
+        {filteredTeachers.slice(0, visibleCount).map((teacher) => (
           <li key={`${teacher.name}-${teacher.surname}`}>
             <TeacherCard teacher={teacher} />
           </li>
         ))}
       </ul>
 
-      {teachers.length === visibleCount && (
+      {filteredTeachers.length > visibleCount && (
         <LoadMoreButton onClick={() => setVisibleCount((prev) => prev + 4)} />
       )}
     </div>
