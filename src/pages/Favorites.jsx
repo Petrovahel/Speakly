@@ -12,7 +12,10 @@ export default function FavoritesPage() {
 
   useEffect(() => {
     const fetchFavorites = async () => {
-      if (!user) return;
+      if (!user) {
+        setTeachers([]);
+        return;
+      }
 
       try {
         const allTeachers = await getTeachers();
@@ -36,13 +39,24 @@ export default function FavoritesPage() {
     return <h2>Please log in to view favorites</h2>;
   }
 
+  const handleRemoveFavorite = (teacherId) => {
+    setTeachers((prev) =>
+      prev.filter(
+        (teacher) => `${teacher.name}-${teacher.surname}` !== teacherId,
+      ),
+    );
+  };
+
   return (
     <div className={css.favoritesPage}>
       {teachers.length > 0 ? (
         <ul className={css.favoritesList}>
           {teachers.map((teacher) => (
             <li key={`${teacher.name}-${teacher.surname}`}>
-              <TeacherCard teacher={teacher} />
+              <TeacherCard
+                teacher={teacher}
+                onRemoveFavorite={handleRemoveFavorite}
+              />
             </li>
           ))}
         </ul>

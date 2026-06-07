@@ -8,7 +8,7 @@ import { getFavorites, toggleFavorite } from "../../services/favoritesApi";
 import BookingModal from "../BookingModal/BookingModal";
 import toast from "react-hot-toast";
 
-export default function TeacherCard({ teacher }) {
+export default function TeacherCard({ teacher, onRemoveFavorite }) {
   const [showMore, setShowMore] = useState(false);
   const { user } = useAuth();
 
@@ -30,6 +30,7 @@ export default function TeacherCard({ teacher }) {
 
     if (isFavorite) {
       toast.success("Teacher removed from favorites");
+      onRemoveFavorite?.(teacherId);
     } else {
       toast.success("Teacher added to favorites");
     }
@@ -55,7 +56,11 @@ export default function TeacherCard({ teacher }) {
             </p>
           </ul>
           <button onClick={handleFavorite}>
-            {isFavorite ? <FaHeart color="red" /> : <FiHeart />}
+            {isFavorite ? (
+              <FaHeart color="red" size={26} />
+            ) : (
+              <FiHeart size={26} />
+            )}
           </button>
         </div>
 
