@@ -35,10 +35,6 @@ export default function FavoritesPage() {
     fetchFavorites();
   }, [user]);
 
-  if (!user) {
-    return <h2>Please log in to view favorites</h2>;
-  }
-
   const handleRemoveFavorite = (teacherId) => {
     setTeachers((prev) =>
       prev.filter(

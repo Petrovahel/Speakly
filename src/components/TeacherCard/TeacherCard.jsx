@@ -1,5 +1,5 @@
 import css from "./TeacherCard.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiStar } from "react-icons/fi";
 import { FiHeart } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
@@ -14,9 +14,20 @@ export default function TeacherCard({ teacher, onRemoveFavorite }) {
 
   const teacherId = `${teacher.name}-${teacher.surname}`;
 
-  const favorites = user ? getFavorites(user.uid) : [];
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  const [isFavorite, setIsFavorite] = useState(favorites.includes(teacherId));
+  useEffect(() => {
+    if (!user) {
+      setIsFavorite(false);
+      return;
+    }
+
+    const favorites = getFavorites(user.uid);
+
+    setTimeout(() => {
+      setIsFavorite(favorites.includes(teacherId));
+    }, 0);
+  }, [user, teacherId]);
 
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
@@ -28,14 +39,17 @@ export default function TeacherCard({ teacher, onRemoveFavorite }) {
 
     toggleFavorite(user.uid, teacherId);
 
-    if (isFavorite) {
+    const updatedFavorites = getFavorites(user.uid);
+    const isNowFavorite = updatedFavorites.includes(teacherId);
+
+    setIsFavorite(isNowFavorite);
+
+    if (isNowFavorite) {
+      toast.success("Teacher added to favorites");
+    } else {
       toast.success("Teacher removed from favorites");
       onRemoveFavorite?.(teacherId);
-    } else {
-      toast.success("Teacher added to favorites");
     }
-
-    setIsFavorite(!isFavorite);
   };
 
   return (
